@@ -1,5 +1,6 @@
 package com.github.piyushpatel2005.customer;
 
+import com.github.piyushpatel2005.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,5 +22,30 @@ public class CustomerJpaDataAccessService implements CustomerDao {
     @Override
     public Optional<Customer> selectCustomerById(Integer id) {
         return customerRepository.findById(id);
+    }
+
+    @Override
+    public void insertCustomer(Customer customer) {
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public boolean existsPersonWithEamil(String email) {
+        return customerRepository.existsCustomerByEmail(email);
+    }
+
+    @Override
+    public boolean existsCustomerById(Integer id) {
+        return customerRepository.existsCustomerById(id);
+    }
+
+    @Override
+    public void deleteCustomerById(Integer id) {
+        customerRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateCustomer(Customer update) {
+        customerRepository.save(update);
     }
 }
